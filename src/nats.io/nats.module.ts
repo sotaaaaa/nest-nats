@@ -3,11 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { NatsOptions } from '@nestjs/microservices';
 import { NatsPublishModule } from './publish';
 
-@Module({
-  imports: [ConfigService],
-  providers: [ConfigService],
-  exports: [ConfigService],
-})
+@Module({})
 export class NatsCoreModule {
   /**
    * Phục vụ những người không dùng với nest-core

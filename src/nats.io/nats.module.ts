@@ -25,7 +25,6 @@ export class NatsCoreModule {
   static forPlugin(): DynamicModule {
     return {
       module: NatsCoreModule,
-      providers: [ConfigService],
       imports: [NatsPublishModule.registerAsync()],
     };
   }

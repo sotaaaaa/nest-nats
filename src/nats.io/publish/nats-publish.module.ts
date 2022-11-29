@@ -11,7 +11,6 @@ export class NatsPublishModule {
     const imports = [
       ClientsModule.registerAsync([
         {
-          imports: [ConfigService],
           inject: [ConfigService],
           name: NATS_PUBLISH_EXCEC,
           useFactory: async (configService: ConfigService) => {

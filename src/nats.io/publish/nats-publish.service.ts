@@ -21,7 +21,7 @@ export class NatsPublishService
   protected readonly timeout: number;
 
   constructor(
-    private configService: ConfigService,
+    private readonly configService: ConfigService,
 
     @Inject(NATS_PUBLISH_EXCEC)
     private readonly clientNats: ClientNats,

@@ -1,7 +1,7 @@
 import { Inject } from '@nestjs/common';
 import { NatsPublishService } from '../publish';
 
-export function NatsClient(): (
+export function NastClientInstance(): (
   target: Record<string, any>,
   key: string | symbol,
   index?: number,

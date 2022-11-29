@@ -1,4 +1,3 @@
-import { NastClient } from './types/nats-publish.type';
 import { v4 as uuidv4 } from 'uuid';
 import * as _ from 'lodash';
 import {

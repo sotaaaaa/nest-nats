@@ -1,6 +1,6 @@
 {
   "name": "@sotaaaaa/nest-nats",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "description": "NestJS - Nats module",
   "keywords": [

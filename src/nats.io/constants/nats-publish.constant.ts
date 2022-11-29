@@ -1,0 +1,1 @@
+export const NATS_PUBLISH_EXCEC = 'NATS_PUBLISH_EXCEC';

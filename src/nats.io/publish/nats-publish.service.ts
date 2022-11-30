@@ -18,16 +18,12 @@ import { NatsPublishOptions, RequestNats } from './types';
 export class NatsPublishService
   implements OnApplicationBootstrap, OnModuleDestroy
 {
-  protected readonly timeout: number;
-
   constructor(
     private readonly configService: ConfigService,
 
     @Inject(NATS_PUBLISH_EXCEC)
     private readonly clientNats: ClientNats,
-  ) {
-    this.timeout = this.configService.get('transporters.nats.timeout') || 10000;
-  }
+  ) {}
 
   /**
    * Connect đến nats server
@@ -46,8 +42,7 @@ export class NatsPublishService
     try {
       options = options || {};
 
-      const timeout =
-        this.configService.get('transporters.nats.timeout') || 10000;
+      const time = this.configService.get('transporters.nats.timeout') || 10000;
       const request: RequestNats<I> = {
         key: uuidv4(),
         value: data,
@@ -58,7 +53,7 @@ export class NatsPublishService
       const message: O = await firstValueFrom(
         this.clientNats
           .send<any, RequestNats<I>>(event, request)
-          .pipe(timeout(timeout)),
+          .pipe(timeout(time)),
       );
 
       return message;
@@ -80,10 +75,11 @@ export class NatsPublishService
       context: options?.context ? options.context : undefined,
     };
 
+    const time = this.configService.get('transporters.nats.timeout') || 10000;
     const emited = await firstValueFrom(
       this.clientNats
         .emit<any, RequestNats<I>>(event, request)
-        .pipe(timeout(this.timeout)),
+        .pipe(timeout(time)),
     );
 
     return emited;

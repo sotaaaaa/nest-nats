@@ -1,7 +1,7 @@
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { applicationSetup } from '@sotaaaaa/nest-core';
+import { microserviceSetup } from '@sotaaaaa/nest-core';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -11,7 +11,7 @@ async function bootstrap() {
 
   const configService = app.get(ConfigService);
 
-  await applicationSetup(app, {
+  await microserviceSetup(app, {
     serviceName: 'SERVICE_GATEWAY_V2',
     configPath:
       '/Users/sotaaaaa/Workspace/nestjs-package/nest-nats/samples/nest-microservice/configs.yaml',

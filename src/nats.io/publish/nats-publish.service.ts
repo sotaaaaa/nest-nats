@@ -63,8 +63,10 @@ export class NatsPublishService
 
       return message;
     } catch (error) {
-      Logger.error(`[Nest-nats] Send error message ${event}`, data);
-      throw new ServiceUnavailableException(`Service ${event} unavailable!`);
+      console.error('[Nest-nats]', error);
+      throw new ServiceUnavailableException(
+        `Nats message ${event} unavailable!`,
+      );
     }
   }
 

@@ -29,7 +29,7 @@ export interface RequestNats<T = Record<string, string>> {
   context?: NatsContext;
 }
 
-export interface ClientNatsService {
+export interface ClientNats {
   send<O = any, I = any>(
     event: string,
     data: I,

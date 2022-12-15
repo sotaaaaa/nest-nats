@@ -43,10 +43,13 @@ export class NatsPublishService
       options = options || {};
 
       const time = this.configService.get('transporters.nats.timeout') || 10000;
+      const headers = options?.headers
+        ? { ...options?.headers, timestamp: Date.now() }
+        : { timestamp: Date.now() };
       const request: RequestNats<I> = {
         key: uuidv4(),
         value: data,
-        headers: options?.headers ? options.headers : undefined,
+        headers: headers,
         context: options?.context ? options.context : undefined,
       };
 
@@ -68,14 +71,17 @@ export class NatsPublishService
   async emit<I = any>(event: string, data: I, options?: NatsPublishOptions) {
     options = options || {};
 
+    const time = this.configService.get('transporters.nats.timeout') || 10000;
+    const headers = options?.headers
+      ? { ...options?.headers, timestamp: Date.now() }
+      : { timestamp: Date.now() };
     const request: RequestNats<I> = {
       key: uuidv4(),
       value: data,
-      headers: options?.headers ? options.headers : undefined,
+      headers: headers,
       context: options?.context ? options.context : undefined,
     };
 
-    const time = this.configService.get('transporters.nats.timeout') || 10000;
     const emited = await firstValueFrom(
       this.clientNats
         .emit<any, RequestNats<I>>(event, request)
